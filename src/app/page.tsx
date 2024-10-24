@@ -13,7 +13,6 @@ import {
 	AccordionItem,
 	AccordionTrigger,
 } from "@/components/ui/accordion";
-import Image from "next/image";
 import Link from "next/link";
 import { Footer } from "@/components/footer";
 
@@ -186,8 +185,8 @@ function FAQ() {
 						</AccordionTrigger>
 						<AccordionContent>
 							Your whitelist access is permanent. Once you purchase a spot,
-							you'll have access to the server as long as it's running and you
-							follow the server rules.
+							you&apos;ll have access to the server as long as it&apos;s running
+							and you follow the server rules.
 						</AccordionContent>
 					</AccordionItem>
 					<AccordionItem value="item-3">
