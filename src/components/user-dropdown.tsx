@@ -11,8 +11,8 @@ import {
 
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { CreditCard, LogOut, Star, User as UserIcon } from "lucide-react";
-import { logOut } from "@/app/actions";
 import { Button } from "./ui/button";
+import { signOut } from "next-auth/react";
 
 export default function UserDropdown({ user }: { user: User }) {
 	return (
@@ -45,14 +45,18 @@ export default function UserDropdown({ user }: { user: User }) {
 						<span>Subscription</span>
 					</DropdownMenuItem>
 					<DropdownMenuSeparator />
-					<form action={logOut} className="w-full">
-						<button type="submit" className="w-full">
-							<DropdownMenuItem>
-								<LogOut />
-								<span>Log out</span>
-							</DropdownMenuItem>
-						</button>
-					</form>
+					{/* <form action={logOut} className="w-full"> */}
+					<button
+						type="submit"
+						className="w-full"
+						onClick={() => signOut({ redirectTo: "/" })}
+					>
+						<DropdownMenuItem>
+							<LogOut />
+							<span>Log out</span>
+						</DropdownMenuItem>
+					</button>
+					{/* </form> */}
 				</DropdownMenuContent>
 			</DropdownMenu>
 		</>
