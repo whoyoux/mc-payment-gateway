@@ -1,5 +1,5 @@
-import { Button } from "@/components/ui/button";
-import { signOut } from "@/lib/auth";
+import SignOutButton from "./signout-button";
+// import { signOut } from "@/lib/auth";
 
 // const navItems = [
 // 	{
@@ -31,18 +31,5 @@ export default function DashboardHeader() {
 				<SignOutButton />
 			</div>
 		</header>
-	);
-}
-
-function SignOutButton() {
-	return (
-		<form
-			action={async () => {
-				"use server";
-				await signOut({ redirectTo: "/" });
-			}}
-		>
-			<Button>Sign out</Button>
-		</form>
 	);
 }
