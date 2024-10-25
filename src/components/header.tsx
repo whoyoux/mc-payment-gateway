@@ -1,5 +1,5 @@
 import { Menu } from "lucide-react";
-import { Button } from "./ui/button";
+import { Button, buttonVariants } from "./ui/button";
 
 import {
 	Sheet,
@@ -9,10 +9,17 @@ import {
 	SheetTrigger,
 } from "@/components/ui/sheet";
 import { cn } from "@/lib/utils";
+import Link from "next/link";
+
+const navItems = [
+	{ title: "Features", href: "/#features" },
+	{ title: "Pricing", href: "/#pricing" },
+	{ title: "FAQ", href: "/#faq" },
+];
 
 export function Header() {
 	return (
-		<header className="flex px-4 py-6 border-b justify-between items-center">
+		<header className="flex px-4 py-6 border-b justify-between items-center sticky top-0 bg-background">
 			<h1 className="font-semibold">McServer</h1>
 			<div className="flex items-center gap-4">
 				<DesktopNav className="hidden md:flex" />
@@ -27,9 +34,15 @@ function DesktopNav({ className }: { className?: string }) {
 	return (
 		<>
 			<nav className={cn("flex items-center gap-2", className)}>
-				<Button variant="link">Features</Button>
-				<Button variant="link">Pricing</Button>
-				<Button variant="link">FAQ</Button>
+				{navItems.map((item) => (
+					<Link
+						key={item.href}
+						href={item.href}
+						className={cn(buttonVariants({ variant: "link" }))}
+					>
+						{item.title}
+					</Link>
+				))}
 			</nav>
 		</>
 	);
@@ -50,9 +63,15 @@ function MobileNav({ className }: { className?: string }) {
 						{/* <SheetDescription>tesdtwehjfgwsety</SheetDescription> */}
 					</SheetHeader>
 					<nav className="flex flex-col gap-2 mt-4">
-						<Button variant="link">Features</Button>
-						<Button variant="link">Pricing</Button>
-						<Button variant="link">FAQ</Button>
+						{navItems.map((item) => (
+							<Link
+								key={item.href}
+								href={item.href}
+								className={cn(buttonVariants({ variant: "link" }))}
+							>
+								{item.title}
+							</Link>
+						))}
 					</nav>
 				</SheetContent>
 			</Sheet>
