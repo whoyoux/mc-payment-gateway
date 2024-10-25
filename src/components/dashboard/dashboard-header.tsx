@@ -1,18 +1,16 @@
-import { Button, buttonVariants } from "@/components/ui/button";
+import { Button } from "@/components/ui/button";
 import { signOut } from "@/lib/auth";
-import { cn } from "@/lib/utils";
-import Link from "next/link";
 
-const navItems = [
-	{
-		label: "Billing",
-		href: "/billing",
-	},
-	{
-		label: "Subscription",
-		href: "/subscription",
-	},
-];
+// const navItems = [
+// 	{
+// 		label: "Billing",
+// 		href: "/billing",
+// 	},
+// 	{
+// 		label: "Subscription",
+// 		href: "/subscription",
+// 	},
+// ];
 
 export default function DashboardHeader() {
 	return (
