@@ -13,6 +13,7 @@ import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { CreditCard, LogOut, Star, User as UserIcon } from "lucide-react";
 import { Button } from "./ui/button";
 import { signOut } from "next-auth/react";
+import Link from "next/link";
 
 export default function UserDropdown({ user }: { user: User }) {
 	return (
@@ -32,10 +33,12 @@ export default function UserDropdown({ user }: { user: User }) {
 				<DropdownMenuContent className="w-56">
 					<DropdownMenuLabel>My Account</DropdownMenuLabel>
 					<DropdownMenuSeparator />
-					<DropdownMenuItem>
-						<UserIcon />
-						<span>Profile</span>
-					</DropdownMenuItem>
+					<Link href="/dashboard">
+						<DropdownMenuItem>
+							<UserIcon />
+							<span>Dashboard</span>
+						</DropdownMenuItem>
+					</Link>
 					<DropdownMenuItem>
 						<CreditCard />
 						<span>Billing</span>

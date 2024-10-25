@@ -3,7 +3,6 @@ import "./globals.css";
 
 import { Inter as FontSans } from "next/font/google";
 import { cn } from "@/lib/utils";
-import { Header } from "@/components/header";
 
 import { SessionProvider } from "next-auth/react";
 
@@ -30,10 +29,7 @@ export default function RootLayout({
 					fontSans.variable,
 				)}
 			>
-				<SessionProvider>
-					<Header />
-					{children}
-				</SessionProvider>
+				<SessionProvider>{children}</SessionProvider>
 			</body>
 		</html>
 	);
