@@ -54,7 +54,7 @@ export default async function DashboardPage() {
 						subscriptionDetails={{
 							monthlyCost: 29.99,
 							nextBillingDate: "10.11.2024",
-							plan: "BASIC",
+							plan: "ACCESS PLAN",
 						}}
 					/>
 					<UserBillings />
