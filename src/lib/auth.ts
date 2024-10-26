@@ -2,6 +2,7 @@ import NextAuth, { type DefaultSession } from "next-auth";
 import Discord from "next-auth/providers/discord";
 import { PrismaAdapter } from "@auth/prisma-adapter";
 import { prisma } from "./prisma";
+import { createStripeCustomer } from "./stripe";
 
 declare module "next-auth" {
 	interface Session {
@@ -23,6 +24,11 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
 					id: user.id,
 				},
 			};
+		},
+	},
+	events: {
+		async createUser({ user }) {
+			await createStripeCustomer(user);
 		},
 	},
 });

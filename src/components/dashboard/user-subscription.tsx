@@ -11,28 +11,82 @@ import {
 
 import { Badge } from "@/components/ui/badge";
 
-export default function UserSubscription() {
+import { Table, TableBody, TableCell, TableRow } from "@/components/ui/table";
+
+type Props = {
+	hasSubscription: boolean;
+	subscriptionDetails?: {
+		plan: string;
+		nextBillingDate: string;
+		monthlyCost: number;
+	};
+};
+
+export default function UserSubscription({
+	hasSubscription,
+	subscriptionDetails,
+}: Props) {
 	return (
 		<>
 			<Card>
 				<CardHeader>
 					<CardTitle className="flex items-center gap-4">
 						My Subscription{" "}
-						<Badge className="bg-green-500 hover:bg-green-600">ACTIVE</Badge>
+						{hasSubscription && (
+							<Badge className="bg-green-500 hover:bg-green-600">ACTIVE</Badge>
+						)}
 					</CardTitle>
-					<CardDescription>Manage your subscription</CardDescription>
+					<CardDescription>
+						{hasSubscription
+							? "Manage your subscription"
+							: "Subscribe to access premium features"}
+					</CardDescription>
 				</CardHeader>
 				<CardContent>
-					<p>Your current subscription: Pro Plan</p>
-					<p>Next billing date: June 1, 2023</p>
-					<p>Monthly cost: $19.99</p>
+					{hasSubscription ? (
+						<Table>
+							<TableBody>
+								<TableRow>
+									<TableCell className="font-medium">Current Plan</TableCell>
+									<TableCell className="text-right">
+										{subscriptionDetails?.plan}
+									</TableCell>
+								</TableRow>
+								<TableRow>
+									<TableCell className="font-medium">
+										Next Billing Date
+									</TableCell>
+									<TableCell className="text-right">
+										{subscriptionDetails?.nextBillingDate}
+									</TableCell>
+								</TableRow>
+								<TableRow>
+									<TableCell className="font-medium">Monthly Cost</TableCell>
+									<TableCell className="text-right">
+										${subscriptionDetails?.monthlyCost.toFixed(2)}
+									</TableCell>
+								</TableRow>
+							</TableBody>
+						</Table>
+					) : (
+						<p>
+							You don't have an active subscription. Subscribe now to access our
+							server!
+						</p>
+					)}
 				</CardContent>
 				<CardFooter className="flex flex-col items-start gap-2">
-					<p className="text-sm text-gray-500 mb-2">
-						Canceling your subscription will end your access to premium features
-						at the end of your current billing cycle.
-					</p>
-					<Button variant="destructive">Cancel my subscription</Button>
+					{hasSubscription ? (
+						<>
+							<p className="text-sm text-gray-500 mb-2">
+								Canceling your subscription will end your access to premium
+								features at the end of your current billing cycle.
+							</p>
+							<Button variant="destructive">Cancel my subscription</Button>
+						</>
+					) : (
+						<Button variant="default">Subscribe Now</Button>
+					)}
 				</CardFooter>
 			</Card>
 		</>

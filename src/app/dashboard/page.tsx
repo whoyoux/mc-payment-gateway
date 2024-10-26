@@ -23,7 +23,7 @@ const getSubscription = async (id: string) => {
 	// 	where: { userId: id },
 	// });
 	// return result;
-	return false;
+	return true;
 };
 
 export default async function DashboardPage() {
@@ -49,7 +49,14 @@ export default async function DashboardPage() {
 				<DashboardHeader />
 				<main className="pt-4 px-4 flex flex-col max-w-screen-lg mx-auto gap-4">
 					<UserInGameName username={username ?? null} />
-					<UserSubscription />
+					<UserSubscription
+						hasSubscription={subscription}
+						subscriptionDetails={{
+							monthlyCost: 29.99,
+							nextBillingDate: "10.11.2024",
+							plan: "BASIC",
+						}}
+					/>
 					<UserBillings />
 					<UserDangerZone />
 				</main>

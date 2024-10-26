@@ -14,7 +14,7 @@ import SignOutButton from "./signout-button";
 
 export default function DashboardHeader() {
 	return (
-		<header className="flex px-4 md:px-8 py-6 border-b justify-between items-center sticky top-0 bg-background">
+		<header className="flex px-4 md:px-8 py-6 border-b justify-between items-center sticky top-0 bg-background z-10">
 			<h1 className="font-semibold">Dashboard</h1>
 			<div className="flex items-center gap-2">
 				{/* <nav>
