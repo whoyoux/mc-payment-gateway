@@ -67,7 +67,7 @@ export default function UserInGameName({ username }: Props) {
 								Changing name here will change your whitelist slot on server!
 							</>
 						) : (
-							<>You don't have a username yet! </>
+							<>You don&apos;t have a username yet! </>
 						)}
 					</CardDescription>
 				</CardHeader>
@@ -82,7 +82,7 @@ export default function UserInGameName({ username }: Props) {
 							<CircleAlert className="h-4 w-4" />
 							<AlertTitle>Warning!</AlertTitle>
 							<AlertDescription>
-								You haven't set your in-game name yet. Please set it before
+								You haven&apos;t set your in-game name yet. Please set it before
 								buying a subscription!
 							</AlertDescription>
 						</Alert>
