@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import "./globals.css";
+import { Toaster } from "@/components/ui/sonner";
 
 import { Inter as FontSans } from "next/font/google";
 import { cn } from "@/lib/utils";
@@ -57,6 +58,7 @@ export default function RootLayout({
 				)}
 			>
 				<SessionProvider>{children}</SessionProvider>
+				<Toaster richColors theme="light" />
 			</body>
 		</html>
 	);

@@ -1,8 +1,6 @@
 import { prisma } from "@/lib/prisma";
+import { usernameSchema } from "@/schemas/user.schema";
 import { headers } from "next/headers";
-import { z } from "zod";
-
-const schema = z.string().min(3).max(40);
 
 export const revalidate = 60;
 
@@ -17,14 +15,17 @@ export async function GET(
 	}
 
 	// Ensure the request is authenticated with the API secret
-	const headersList = await headers();
-	const secret = headersList.get("x-secret");
-	if (secret !== process.env.API_SECRET) {
-		return new Response("Unauthorized", { status: 401 });
+	// This is only required in production
+	if (process.env.NODE_ENV === "production") {
+		const headersList = await headers();
+		const secret = headersList.get("x-secret");
+		if (secret !== process.env.API_SECRET) {
+			return new Response("Unauthorized", { status: 401 });
+		}
 	}
 
 	// Validate if username is valid
-	const validated = await schema.safeParseAsync(username);
+	const validated = await usernameSchema.safeParseAsync(username);
 	if (!validated.success) {
 		return new Response("Invalid username", { status: 400 });
 	}
@@ -32,7 +33,9 @@ export async function GET(
 	// Check if the username is whitelisted
 	const isWhitelisted = await prisma.whitelist.findFirst({
 		where: {
-			nickname: validated.data,
+			user: {
+				username,
+			},
 		},
 	});
 
