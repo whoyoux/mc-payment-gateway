@@ -118,7 +118,10 @@ export default function UserInGameName({ username }: Props) {
 								)}
 							/>
 
-							<Button>Update my in-game name</Button>
+							{/* No need to change when username in database is equals to username in field */}
+							<Button disabled={username === form.getValues().username}>
+								Update my in-game name
+							</Button>
 						</form>
 					</Form>
 				</CardFooter>
