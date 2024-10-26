@@ -70,8 +70,8 @@ export default function UserSubscription({
 						</Table>
 					) : (
 						<p>
-							You don't have an active subscription. Subscribe now to access our
-							server!
+							You don&apos;t have an active subscription. Subscribe now to
+							access our server!
 						</p>
 					)}
 				</CardContent>
