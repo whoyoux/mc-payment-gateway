@@ -16,6 +16,7 @@ import {
 import Link from "next/link";
 import { Footer } from "@/components/footer";
 import { Header } from "@/components/header";
+import { PurchaseButton } from "@/components/purchase-button";
 
 export default function Home() {
 	return (
@@ -115,44 +116,24 @@ function Pricing() {
 				<h2 className="text-3xl font-bold tracking-tighter sm:text-5xl text-center mb-12">
 					Whitelist Pricing
 				</h2>
-				<div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-					<Card>
+				<div className="flex items-center justify-center">
+					<Card className="w-full max-w-screen-md">
 						<CardHeader>
-							<CardTitle>Basic Access</CardTitle>
-							<CardDescription>For casual players</CardDescription>
+							<CardTitle>Server Access</CardTitle>
+							<CardDescription>Join our exclusive community</CardDescription>
 						</CardHeader>
 						<CardContent>
-							<p className="text-4xl font-bold">$9.99</p>
+							<p className="text-4xl font-bold">5.99 zł</p>
 							<p className="text-sm text-gray-500">One-time payment</p>
+							<ul className="mt-4 space-y-2 text-sm">
+								<li>✓ Full server access</li>
+								<li>✓ Join a friendly community</li>
+								<li>✓ Permanent whitelist spot</li>
+							</ul>
 						</CardContent>
 						<CardFooter>
-							<Button className="w-full">Buy Now</Button>
-						</CardFooter>
-					</Card>
-					<Card>
-						<CardHeader>
-							<CardTitle>Premium Access</CardTitle>
-							<CardDescription>For dedicated players</CardDescription>
-						</CardHeader>
-						<CardContent>
-							<p className="text-4xl font-bold">$19.99</p>
-							<p className="text-sm text-gray-500">One-time payment</p>
-						</CardContent>
-						<CardFooter>
-							<Button className="w-full">Buy Now</Button>
-						</CardFooter>
-					</Card>
-					<Card>
-						<CardHeader>
-							<CardTitle>VIP Access</CardTitle>
-							<CardDescription>For the ultimate experience</CardDescription>
-						</CardHeader>
-						<CardContent>
-							<p className="text-4xl font-bold">$29.99</p>
-							<p className="text-sm text-gray-500">One-time payment</p>
-						</CardContent>
-						<CardFooter>
-							<Button className="w-full">Buy Now</Button>
+							{/* <Button className="w-full">Buy Now</Button> */}
+							<PurchaseButton />
 						</CardFooter>
 					</Card>
 				</div>

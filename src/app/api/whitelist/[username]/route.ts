@@ -16,12 +16,18 @@ export async function GET(
 
 	// Ensure the request is authenticated with the API secret
 	// This is only required in production
-	if (process.env.NODE_ENV === "production") {
-		const headersList = await headers();
-		const secret = headersList.get("x-secret");
-		if (secret !== process.env.API_SECRET) {
-			return new Response("Unauthorized", { status: 401 });
-		}
+	// if (process.env.NODE_ENV === "production") {
+	// 	const headersList = await headers();
+	// 	const secret = headersList.get("x-secret");
+	// 	if (secret !== process.env.API_SECRET) {
+	// 		return new Response("Unauthorized", { status: 401 });
+	// 	}
+	// }
+
+	const headersList = await headers();
+	const secret = headersList.get("x-secret");
+	if (secret !== process.env.API_SECRET) {
+		return new Response("Unauthorized", { status: 401 });
 	}
 
 	// Validate if username is valid
@@ -31,7 +37,7 @@ export async function GET(
 	}
 
 	// Check if the username is whitelisted
-	const isWhitelisted = await prisma.whitelist.findFirst({
+	const isWhitelisted = await prisma.whitelistAccess.findFirst({
 		where: {
 			user: {
 				username,
@@ -39,7 +45,11 @@ export async function GET(
 		},
 	});
 
-	return new Response(JSON.stringify({ isWhitelisted: !!isWhitelisted }), {
+	const response = {
+		whitelisted: !!isWhitelisted,
+	};
+
+	return new Response(JSON.stringify(response), {
 		status: 200,
 	});
 }

@@ -23,13 +23,42 @@ import {
 	Printer as PrinterIcon,
 } from "lucide-react";
 
-export default function UserBillings() {
+type Props = {
+	hasAccess: boolean;
+	hasBoughtDate?: Date;
+	pricePaid?: number;
+	status?: string;
+};
+
+export default function UserBillings({
+	hasAccess,
+	hasBoughtDate,
+	pricePaid,
+	status,
+}: Props) {
+	if (!hasAccess) {
+		return (
+			<Card>
+				<CardHeader>
+					<CardTitle>Purchase History</CardTitle>
+					<CardDescription>Your server access purchase</CardDescription>
+				</CardHeader>
+				<CardContent>
+					<p className="text-sm text-gray-500">
+						You haven&apos;t made any purchases yet. Buy server access to see
+						your purchase history.
+					</p>
+				</CardContent>
+			</Card>
+		);
+	}
+
 	return (
 		<>
 			<Card>
 				<CardHeader>
-					<CardTitle>Billing History</CardTitle>
-					<CardDescription>Your recent billing transactions</CardDescription>
+					<CardTitle>Purchase History</CardTitle>
+					<CardDescription>Your server access purchase</CardDescription>
 				</CardHeader>
 				<CardContent className="overflow-x-auto">
 					<Table>
@@ -49,52 +78,39 @@ export default function UserBillings() {
 							</TableRow>
 						</TableHeader>
 						<TableBody>
-							{[...Array(10)].map((_, index) => {
-								const date = new Date();
-								date.setMonth(date.getMonth() - index);
-								return (
-									// biome-ignore lint/suspicious/noArrayIndexKey: Will be changed in future
-									<TableRow key={index}>
-										<TableCell className="whitespace-nowrap">
-											{date.toLocaleDateString()}
-										</TableCell>
-										<TableCell>Pro Plan Subscription</TableCell>
-										<TableCell>
-											<span className="flex items-center gap-2">
-												<CreditCardIcon className="hidden sm:inline" />
-												<span className="whitespace-nowrap">Credit Card</span>
-											</span>
-										</TableCell>
-										<TableCell className="text-right whitespace-nowrap">
-											$19.99
-										</TableCell>
-										<TableCell className="text-right">
-											<Button
-												variant="outline"
-												size="sm"
-												className="whitespace-nowrap"
-												// onClick={() => {
-												// 	// Add logic to print invoice
-												// 	console.log(
-												// 		`Print invoice for ${date.toLocaleDateString()}`,
-												// 	);
-												// }}
-											>
-												<PrinterIcon className="w-4 h-4 mr-2" />
-												Print Invoice
-											</Button>
-										</TableCell>
-									</TableRow>
-								);
-							})}
+							<TableRow>
+								<TableCell className="whitespace-nowrap">
+									March 15, 2024
+								</TableCell>
+								<TableCell>Server Access - Permanent</TableCell>
+								<TableCell>
+									<span className="flex items-center gap-2">
+										<CreditCardIcon className="hidden sm:inline" />
+										<span className="whitespace-nowrap">Credit Card</span>
+									</span>
+								</TableCell>
+								<TableCell className="text-right whitespace-nowrap">
+									5.99 zł
+								</TableCell>
+								<TableCell className="text-right">
+									<Button
+										variant="outline"
+										size="sm"
+										className="whitespace-nowrap"
+									>
+										<PrinterIcon className="w-4 h-4 mr-2" />
+										Print Invoice
+									</Button>
+								</TableCell>
+							</TableRow>
 						</TableBody>
 					</Table>
 				</CardContent>
-				<CardFooter>
+				{/* <CardFooter>
 					<Button variant="default" className="w-full sm:w-auto">
-						Print All Invoices
+						Print Invoice
 					</Button>
-				</CardFooter>
+				</CardFooter> */}
 			</Card>
 		</>
 	);

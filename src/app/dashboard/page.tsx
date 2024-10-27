@@ -5,10 +5,10 @@ import DashboardHeader from "@/components/dashboard/dashboard-header";
 
 import { Footer } from "@/components/footer";
 import UserBillings from "@/components/dashboard/user-billings";
-import UserSubscription from "@/components/dashboard/user-subscription";
 import UserInGameName from "@/components/dashboard/user-in-game-name";
 import UserDangerZone from "@/components/dashboard/user-dangerzone";
 import { prisma } from "@/lib/prisma";
+import UserAccess from "@/components/dashboard/user-access";
 
 const getUsername = async (id: string) => {
 	const result = await prisma.user.findUnique({
@@ -18,7 +18,7 @@ const getUsername = async (id: string) => {
 	return result?.username;
 };
 
-const getSubscription = async (id: string) => {
+const getUserAccess = async (id: string) => {
 	// const result = await prisma.subscription.findFirst({
 	// 	where: { userId: id },
 	// });
@@ -34,9 +34,9 @@ export default async function DashboardPage() {
 		return notFound();
 	}
 
-	const [username, subscription] = await Promise.all([
+	const [username, access] = await Promise.all([
 		getUsername(session.user.id),
-		getSubscription(session.user.id),
+		getUserAccess(session.user.id),
 	]);
 
 	console.log(
@@ -49,15 +49,8 @@ export default async function DashboardPage() {
 				<DashboardHeader />
 				<main className="pt-4 px-4 flex flex-col max-w-screen-lg mx-auto gap-4">
 					<UserInGameName username={username ?? null} />
-					<UserSubscription
-						hasSubscription={subscription}
-						subscriptionDetails={{
-							monthlyCost: 29.99,
-							nextBillingDate: "10.11.2024",
-							plan: "ACCESS PLAN",
-						}}
-					/>
-					<UserBillings />
+					<UserAccess hasAccess={!!access} />
+					<UserBillings hasAccess={!!access} />
 					<UserDangerZone />
 				</main>
 			</div>
