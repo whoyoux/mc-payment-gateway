@@ -9,6 +9,18 @@ import {
 	CardTitle,
 } from "@/components/ui/card";
 
+import {
+	AlertDialog,
+	AlertDialogAction,
+	AlertDialogCancel,
+	AlertDialogContent,
+	AlertDialogDescription,
+	AlertDialogFooter,
+	AlertDialogHeader,
+	AlertDialogTitle,
+	AlertDialogTrigger,
+} from "@/components/ui/alert-dialog";
+
 export default function UserDangerZone() {
 	return (
 		<Card className="border-red-500">
@@ -26,10 +38,37 @@ export default function UserDangerZone() {
 				</p>
 			</CardContent>
 			<CardFooter>
+				<DeleteModal />
+			</CardFooter>
+		</Card>
+	);
+}
+
+function DeleteModal() {
+	return (
+		<AlertDialog>
+			<AlertDialogTrigger asChild>
 				<Button variant="destructive" className="w-full sm:w-auto">
 					Remove My Account
 				</Button>
-			</CardFooter>
-		</Card>
+			</AlertDialogTrigger>
+			<AlertDialogContent>
+				<AlertDialogHeader>
+					<AlertDialogTitle className="text-red-500">
+						Are you absolutely sure?
+					</AlertDialogTitle>
+					<AlertDialogDescription className="text-gray-500">
+						This action cannot be undone. This will permanently delete your
+						account and remove your data from our servers.
+					</AlertDialogDescription>
+				</AlertDialogHeader>
+				<AlertDialogFooter>
+					<AlertDialogCancel>Cancel</AlertDialogCancel>
+					<AlertDialogAction className="bg-red-500 hover:bg-red-600">
+						Yes, delete my account permanently
+					</AlertDialogAction>
+				</AlertDialogFooter>
+			</AlertDialogContent>
+		</AlertDialog>
 	);
 }

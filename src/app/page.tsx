@@ -1,3 +1,5 @@
+import { SessionProvider } from "next-auth/react";
+
 import { Button } from "@/components/ui/button";
 import {
 	Card,
@@ -21,14 +23,16 @@ import { PurchaseButton } from "@/components/purchase-button";
 export default function Home() {
 	return (
 		<>
-			<Header />
-			<main className="w-full">
-				<Hero />
-				<Features />
-				<Pricing />
-				<FAQ />
-			</main>
-			<Footer />
+			<SessionProvider>
+				<Header />
+				<main className="w-full">
+					<Hero />
+					<Features />
+					<Pricing />
+					<FAQ />
+				</main>
+				<Footer />
+			</SessionProvider>
 		</>
 	);
 }

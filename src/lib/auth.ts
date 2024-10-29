@@ -32,3 +32,8 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
 		},
 	},
 });
+
+import { cache } from "react";
+export const cachedAuth = cache(async () => {
+	return await auth();
+});

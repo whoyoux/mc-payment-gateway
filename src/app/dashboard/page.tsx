@@ -1,4 +1,4 @@
-import { auth } from "@/lib/auth";
+import { cachedAuth } from "@/lib/auth";
 import { notFound } from "next/navigation";
 
 import DashboardHeader from "@/components/dashboard/dashboard-header";
@@ -29,9 +29,7 @@ const getUserAccess = async (id: string) => {
 };
 
 export default async function DashboardPage() {
-	const timeStart = new Date();
-
-	const session = await auth();
+	const session = await cachedAuth();
 	if (!session || !session.user) {
 		return notFound();
 	}
@@ -40,10 +38,6 @@ export default async function DashboardPage() {
 		getUsername(session.user.id),
 		getUserAccess(session.user.id),
 	]);
-
-	console.log(
-		`Dashboard render time: ${new Date().getTime() - timeStart.getTime()}ms`,
-	);
 
 	return (
 		<>

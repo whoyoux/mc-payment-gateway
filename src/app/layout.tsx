@@ -5,7 +5,6 @@ import { Toaster } from "@/components/ui/sonner";
 import { Inter as FontSans } from "next/font/google";
 import { cn } from "@/lib/utils";
 
-import { SessionProvider } from "next-auth/react";
 import { siteConfig } from "@/lib/config";
 
 export const metadata: Metadata = {
@@ -57,7 +56,8 @@ export default function RootLayout({
 					fontSans.variable,
 				)}
 			>
-				<SessionProvider>{children}</SessionProvider>
+				{/* <SessionProvider>{children}</SessionProvider> */}
+				{children}
 				<Toaster richColors theme="light" />
 			</body>
 		</html>
