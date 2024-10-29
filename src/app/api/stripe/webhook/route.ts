@@ -39,14 +39,27 @@ export async function POST(req: Request) {
 
 			try {
 				//TODO: Send an email to the customer
-				await prisma.user.update({
-					where: {
-						email: customerEmail,
-					},
+				const user = await prisma.user.findUnique({
+					where: { email: customerEmail },
+				});
+
+				if (!user) {
+					return new Response("User not found", { status: 404 });
+				}
+
+				await prisma.whitelistAccess.create({
 					data: {
-						whitelist: {
-							create: {},
+						user: {
+							connect: {
+								id: user.id,
+							},
 						},
+					},
+				});
+
+				await prisma.user.update({
+					where: { id: user.id },
+					data: {
 						hasBoughtAccess: true,
 					},
 				});
