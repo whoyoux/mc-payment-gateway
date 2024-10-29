@@ -47,6 +47,48 @@ export const updateUsernameAction = authActionClient
 		}
 	});
 
+export const removeAccountAction = authActionClient.action(async ({ ctx }) => {
+	try {
+		const result = await prisma.$transaction(async (tx) => {
+			// Delete all sessions first
+			await tx.session.deleteMany({
+				where: {
+					userId: ctx.session.user.id,
+				},
+			});
+
+			// Delete all linked accounts
+			await tx.account.deleteMany({
+				where: {
+					userId: ctx.session.user.id,
+				},
+			});
+
+			// Finally delete the user
+			await tx.user.delete({
+				where: {
+					id: ctx.session.user.id,
+				},
+			});
+
+			return true;
+		});
+
+		if (!result) {
+			return { success: false, message: "Failed to delete account" };
+		}
+
+		// Sign out the user after successful deletion
+	} catch (err) {
+		console.error("Error removing account:", err);
+		return {
+			success: false,
+			message: "An error occurred while deleting account",
+		};
+	}
+	await signOut({ redirectTo: "/" });
+});
+
 type CheckoutResult =
 	| {
 			status: "error";

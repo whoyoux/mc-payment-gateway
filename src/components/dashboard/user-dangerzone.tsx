@@ -20,6 +20,9 @@ import {
 	AlertDialogTitle,
 	AlertDialogTrigger,
 } from "@/components/ui/alert-dialog";
+import { removeAccountAction } from "@/app/actions";
+import { toast } from "sonner";
+import RemoveAccountButton from "./remove-account-button";
 
 export default function UserDangerZone() {
 	return (
@@ -64,9 +67,7 @@ function DeleteModal() {
 				</AlertDialogHeader>
 				<AlertDialogFooter>
 					<AlertDialogCancel>Cancel</AlertDialogCancel>
-					<AlertDialogAction className="bg-red-500 hover:bg-red-600">
-						Yes, delete my account permanently
-					</AlertDialogAction>
+					<RemoveAccountButton />
 				</AlertDialogFooter>
 			</AlertDialogContent>
 		</AlertDialog>
