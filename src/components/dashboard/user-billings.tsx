@@ -59,9 +59,9 @@ export default function UserBillings({ access }: Props) {
 							<TableRow>
 								<TableHead className="whitespace-nowrap">Date</TableHead>
 								<TableHead className="whitespace-nowrap">Description</TableHead>
-								<TableHead className="whitespace-nowrap">
+								{/* <TableHead className="whitespace-nowrap">
 									Payment Method
-								</TableHead>
+								</TableHead> */}
 								<TableHead className="text-right whitespace-nowrap">
 									Amount
 								</TableHead>
@@ -76,13 +76,13 @@ export default function UserBillings({ access }: Props) {
 									{new Date(access.createdAt).toDateString()}
 								</TableCell>
 								<TableCell>Server Access - Permanent</TableCell>
-								<TableCell>
+								{/* <TableCell>
 									<span className="flex items-center gap-2">
-										{/* TODO: get method what user has used */}
+										TODO: get method what user has used
 										<CreditCardIcon className="hidden sm:inline" />
 										<span className="whitespace-nowrap">Credit Card</span>
 									</span>
-								</TableCell>
+								</TableCell> */}
 								<TableCell className="text-right whitespace-nowrap">
 									5.99 zł
 								</TableCell>

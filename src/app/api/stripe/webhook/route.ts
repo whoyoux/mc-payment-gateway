@@ -51,6 +51,7 @@ export async function POST(req: Request) {
 					},
 				});
 			} catch (err) {
+				console.error(err);
 				return new Response(`Error updating user: ${err}`, { status: 500 });
 			}
 
