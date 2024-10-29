@@ -39,28 +39,37 @@ export async function POST(req: Request) {
 
 			try {
 				//TODO: Send an email to the customer
+				// await prisma.user.update({
+				// 	where: {
+				// 		email: customerEmail,
+				// 	},
+				// 	data: {
+				// 		whitelist: {
+				// 			create: {},
+				// 		},
+				// 		hasBoughtAccess: true,
+				// 	},
+				// });
+
 				const user = await prisma.user.findUnique({
-					where: { email: customerEmail },
+					where: {
+						email: customerEmail,
+					},
 				});
 
 				if (!user) {
 					return new Response("User not found", { status: 404 });
 				}
 
-				await prisma.whitelistAccess.create({
-					data: {
-						user: {
-							connect: {
-								id: user.id,
-							},
-						},
-					},
-				});
-
 				await prisma.user.update({
-					where: { id: user.id },
+					where: {
+						id: user.id,
+					},
 					data: {
 						hasBoughtAccess: true,
+						whitelist: {
+							create: {},
+						},
 					},
 				});
 			} catch (err) {
