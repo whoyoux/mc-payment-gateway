@@ -1,3 +1,5 @@
+import "server-only";
+
 import Stripe from "stripe";
 import { prisma } from "./prisma";
 import type { User } from "next-auth";

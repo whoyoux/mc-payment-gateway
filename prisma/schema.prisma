@@ -14,28 +14,6 @@ datasource db {
   directUrl = env("DATABASE_URL_UNPOOLED")
 }
 
-model User {
-  id            String    @id @default(cuid())
-  name          String?
-  email         String?   @unique
-  emailVerified DateTime? @map("email_verified")
-  image         String?
-  accounts      Account[]
-  sessions      Session[]
-
-  username             String?
-  lastUsernameChange   DateTime? @map("last_username_change")
-  usernameChangesCount Int?      @default(0) @map("username_changes_count")
-
-  stripeCustomerId String? @map("stripe_customer_id")
-
-  createdAt DateTime @default(now()) @map("created_at")
-  updatedAt DateTime @updatedAt @map("updated_at")
-
-  hasBoughtAccess Boolean          @default(false) @map("has_bought_access")
-  whitelist       WhitelistAccess?
-}
-
 model Account {
   id                String  @id @default(cuid())
   userId            String  @map("user_id")
@@ -56,6 +34,28 @@ model Account {
   user User @relation(fields: [userId], references: [id], onDelete: Cascade)
 
   @@unique([provider, providerAccountId])
+}
+
+model User {
+  id            String    @id @default(cuid())
+  name          String?
+  email         String?   @unique
+  emailVerified DateTime? @map("email_verified")
+  image         String?
+  accounts      Account[]
+  sessions      Session[]
+
+  username             String?
+  lastUsernameChange   DateTime? @map("last_username_change")
+  usernameChangesCount Int?      @default(0) @map("username_changes_count")
+
+  stripeCustomerId String? @map("stripe_customer_id")
+
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
+
+  hasBoughtAccess Boolean          @default(false) @map("has_bought_access")
+  whitelist       WhitelistAccess?
 }
 
 model Session {
