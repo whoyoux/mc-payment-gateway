@@ -3,11 +3,17 @@
 import { goToCheckout } from "@/app/actions";
 import { Button } from "./ui/button";
 import { toast } from "sonner";
+import { cn } from "@/lib/utils";
 
-export function PurchaseButton() {
+type Props = {
+	customText?: string;
+	className?: string;
+};
+
+export function PurchaseButton({ customText, className }: Props) {
 	return (
 		<Button
-			className="w-full"
+			className={cn(className)}
 			onClick={async () => {
 				try {
 					const result = await goToCheckout();
@@ -17,7 +23,7 @@ export function PurchaseButton() {
 				}
 			}}
 		>
-			Buy now
+			{customText ? customText : "Buy now"}
 		</Button>
 	);
 }

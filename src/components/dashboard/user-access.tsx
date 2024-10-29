@@ -12,30 +12,32 @@ import {
 import { Badge } from "@/components/ui/badge";
 
 import { Table, TableBody, TableCell, TableRow } from "@/components/ui/table";
+import type { WhitelistAccess } from "@prisma/client";
+import { PurchaseButton } from "../purchase-button";
 
 type Props = {
-	hasAccess: boolean;
+	access: WhitelistAccess | null;
 };
 
-export default function UserAccess({ hasAccess }: Props) {
+export default function UserAccess({ access }: Props) {
 	return (
 		<>
 			<Card>
 				<CardHeader>
 					<CardTitle className="flex items-center gap-4">
 						Server Access{" "}
-						{hasAccess && (
+						{!!access && (
 							<Badge className="bg-green-500 hover:bg-green-600">ACTIVE</Badge>
 						)}
 					</CardTitle>
 					<CardDescription>
-						{hasAccess
+						{access
 							? "You have permanent access to our server"
 							: "Purchase access to join our server"}
 					</CardDescription>
 				</CardHeader>
 				<CardContent>
-					{hasAccess ? (
+					{access ? (
 						<Table>
 							<TableBody>
 								<TableRow>
@@ -52,7 +54,9 @@ export default function UserAccess({ hasAccess }: Props) {
 								</TableRow>
 								<TableRow>
 									<TableCell className="font-medium">Bought Date</TableCell>
-									<TableCell className="text-right">March 15, 2024</TableCell>
+									<TableCell className="text-right">
+										{new Date(access.createdAt).toDateString()}
+									</TableCell>
 								</TableRow>
 							</TableBody>
 						</Table>
@@ -64,12 +68,13 @@ export default function UserAccess({ hasAccess }: Props) {
 					)}
 				</CardContent>
 				<CardFooter className="flex flex-col items-start gap-2">
-					{!hasAccess && (
+					{!access && (
 						<>
 							<p className="text-sm text-gray-500 mb-2">
 								One-time payment for permanent access to our Minecraft server.
 							</p>
-							<Button variant="default">Purchase Access (5.99 zł)</Button>
+							{/* <Button variant="default">Purchase Access (5.99 zł)</Button> */}
+							<PurchaseButton customText="Purchase Access (5.99 zł)" />
 						</>
 					)}
 				</CardFooter>

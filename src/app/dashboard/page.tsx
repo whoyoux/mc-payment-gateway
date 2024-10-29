@@ -19,11 +19,13 @@ const getUsername = async (id: string) => {
 };
 
 const getUserAccess = async (id: string) => {
-	// const result = await prisma.subscription.findFirst({
-	// 	where: { userId: id },
-	// });
-	// return result;
-	return true;
+	const result = await prisma.whitelistAccess.findFirst({
+		where: {
+			userId: id,
+		},
+	});
+
+	return result;
 };
 
 export default async function DashboardPage() {
@@ -49,8 +51,8 @@ export default async function DashboardPage() {
 				<DashboardHeader />
 				<main className="pt-4 px-4 flex flex-col max-w-screen-lg mx-auto gap-4">
 					<UserInGameName username={username ?? null} />
-					<UserAccess hasAccess={!!access} />
-					<UserBillings hasAccess={!!access} />
+					<UserAccess access={access} />
+					<UserBillings access={access} />
 					<UserDangerZone />
 				</main>
 			</div>

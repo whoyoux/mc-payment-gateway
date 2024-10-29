@@ -132,8 +132,7 @@ function Pricing() {
 							</ul>
 						</CardContent>
 						<CardFooter>
-							{/* <Button className="w-full">Buy Now</Button> */}
-							<PurchaseButton />
+							<PurchaseButton className="w-full" />
 						</CardFooter>
 					</Card>
 				</div>
