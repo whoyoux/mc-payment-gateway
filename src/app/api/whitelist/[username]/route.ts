@@ -37,11 +37,17 @@ export async function GET(
 	}
 
 	// Check if the username is whitelisted
-	const isWhitelisted = await prisma.whitelistAccess.findFirst({
+	// const isWhitelisted = await prisma.whitelistAccess.findFirst({
+	// 	where: {
+	// 		user: {
+	// 			username,
+	// 		},
+	// 	},
+	// });
+	const isWhitelisted = await prisma.user.findFirst({
 		where: {
-			user: {
-				username,
-			},
+			username,
+			boughtAccess: true,
 		},
 	});
 

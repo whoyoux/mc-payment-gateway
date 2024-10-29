@@ -61,11 +61,10 @@ export const goToCheckout = async (): Promise<CheckoutResult> => {
 	}
 
 	// Check if the user has access
-	const access = await prisma.whitelistAccess.findFirst({
+	const access = await prisma.user.findFirst({
 		where: {
-			user: {
-				id: session.user.id,
-			},
+			id: session.user.id,
+			boughtAccess: true,
 		},
 	});
 

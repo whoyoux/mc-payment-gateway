@@ -51,25 +51,13 @@ export async function POST(req: Request) {
 				// 	},
 				// });
 
-				const user = await prisma.user.findUnique({
+				await prisma.user.update({
 					where: {
 						email: customerEmail,
 					},
-				});
-
-				if (!user) {
-					return new Response("User not found", { status: 404 });
-				}
-
-				await prisma.user.update({
-					where: {
-						id: user.id,
-					},
 					data: {
-						hasBoughtAccess: true,
-						whitelist: {
-							create: {},
-						},
+						accessBoughtDate: new Date(),
+						boughtAccess: true,
 					},
 				});
 			} catch (err) {

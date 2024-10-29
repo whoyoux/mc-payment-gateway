@@ -17,7 +17,6 @@ import {
 	TableHeader,
 	TableRow,
 } from "@/components/ui/table";
-import type { WhitelistAccess } from "@prisma/client";
 
 import {
 	CreditCard as CreditCardIcon,
@@ -25,11 +24,15 @@ import {
 } from "lucide-react";
 
 type Props = {
-	access: WhitelistAccess | null;
+	accessBoughtDate: Date | null;
+	boughtAccess: boolean;
 };
 
-export default function UserBillings({ access }: Props) {
-	if (!access) {
+export default function UserBillings({
+	accessBoughtDate,
+	boughtAccess,
+}: Props) {
+	if (!boughtAccess) {
 		return (
 			<Card>
 				<CardHeader>
@@ -73,7 +76,7 @@ export default function UserBillings({ access }: Props) {
 						<TableBody>
 							<TableRow>
 								<TableCell className="whitespace-nowrap">
-									{new Date(access.createdAt).toDateString()}
+									{new Date(accessBoughtDate || new Date()).toDateString()}
 								</TableCell>
 								<TableCell>Server Access - Permanent</TableCell>
 								{/* <TableCell>

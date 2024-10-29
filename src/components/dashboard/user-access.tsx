@@ -12,32 +12,32 @@ import {
 import { Badge } from "@/components/ui/badge";
 
 import { Table, TableBody, TableCell, TableRow } from "@/components/ui/table";
-import type { WhitelistAccess } from "@prisma/client";
 import { PurchaseButton } from "../purchase-button";
 
 type Props = {
-	access: WhitelistAccess | null;
+	accessBoughtDate: Date | null;
+	boughtAccess: boolean;
 };
 
-export default function UserAccess({ access }: Props) {
+export default function UserAccess({ accessBoughtDate, boughtAccess }: Props) {
 	return (
 		<>
 			<Card>
 				<CardHeader>
 					<CardTitle className="flex items-center gap-4">
 						Server Access{" "}
-						{!!access && (
+						{boughtAccess && (
 							<Badge className="bg-green-500 hover:bg-green-600">ACTIVE</Badge>
 						)}
 					</CardTitle>
 					<CardDescription>
-						{access
+						{boughtAccess
 							? "You have permanent access to our server"
 							: "Purchase access to join our server"}
 					</CardDescription>
 				</CardHeader>
 				<CardContent>
-					{access ? (
+					{boughtAccess ? (
 						<Table>
 							<TableBody>
 								<TableRow>
@@ -55,7 +55,7 @@ export default function UserAccess({ access }: Props) {
 								<TableRow>
 									<TableCell className="font-medium">Bought Date</TableCell>
 									<TableCell className="text-right">
-										{new Date(access.createdAt).toDateString()}
+										{new Date(accessBoughtDate || new Date()).toDateString()}
 									</TableCell>
 								</TableRow>
 							</TableBody>
@@ -68,7 +68,7 @@ export default function UserAccess({ access }: Props) {
 					)}
 				</CardContent>
 				<CardFooter className="flex flex-col items-start gap-2">
-					{!access && (
+					{!boughtAccess && (
 						<>
 							<p className="text-sm text-gray-500 mb-2">
 								One-time payment for permanent access to our Minecraft server.

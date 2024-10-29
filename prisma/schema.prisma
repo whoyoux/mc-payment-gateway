@@ -54,8 +54,11 @@ model User {
   createdAt DateTime @default(now()) @map("created_at")
   updatedAt DateTime @updatedAt @map("updated_at")
 
-  hasBoughtAccess Boolean          @default(false) @map("has_bought_access")
-  whitelist       WhitelistAccess?
+  // hasBoughtAccess Boolean          @default(false) @map("has_bought_access")
+  // whitelist       WhitelistAccess?
+
+  boughtAccess     Boolean   @default(false) @map("bought_access")
+  accessBoughtDate DateTime? @map("access_bought_date")
 }
 
 model Session {
@@ -75,14 +78,4 @@ model VerificationToken {
   expires    DateTime
 
   @@unique([identifier, token])
-}
-
-model WhitelistAccess {
-  id String @id @default(cuid())
-
-  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
-  userId String @unique
-
-  createdAt DateTime @default(now()) @map("created_at")
-  updatedAt DateTime @updatedAt @map("updated_at")
 }
