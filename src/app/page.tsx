@@ -171,7 +171,7 @@ function ServerGallery() {
 									src={image.src}
 									alt={image.alt}
 									fill
-									className="w-full aspect-video object-cover rounded-lg  bg-gray-100"
+									className="w-full aspect-video object-cover rounded-lg  bg-gray-100 -z-10"
 									placeholder="blur"
 									sizes="(max-width: 768px) 90vw, (max-width: 1200px) 30vw, 400px"
 								/>
