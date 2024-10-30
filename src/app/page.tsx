@@ -28,7 +28,12 @@ export default function Home() {
 				<main className="w-full">
 					<Hero />
 					<Features />
+					<ServerGallery />
+
+					<Plugins />
 					<Pricing />
+					<ServerRules />
+					<Commands />
 					<FAQ />
 				</main>
 				<Footer />
@@ -43,6 +48,12 @@ function Hero() {
 			<div className="container px-4 md:px-6 mx-auto">
 				<div className="flex flex-col items-center space-y-4 text-center">
 					<div className="space-y-2">
+						<div className="flex items-center justify-center gap-2 mb-4">
+							<div className="h-3 w-3 rounded-full bg-green-500 animate-pulse" />
+							<span className="text-green-500 font-semibold">
+								Server Online
+							</span>
+						</div>
 						<h1 className="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl lg:text-6xl/none text-white">
 							Get Exclusive Access to Our Minecraft Server
 						</h1>
@@ -52,7 +63,7 @@ function Hero() {
 						</p>
 					</div>
 					<div className="space-x-4">
-						<Button asChild>
+						<Button asChild className="bg-green-600 hover:bg-green-700">
 							<Link href="#pricing">Buy Whitelist Spot</Link>
 						</Button>
 						<Button variant="outline">Learn More</Button>
@@ -64,6 +75,30 @@ function Hero() {
 }
 
 function Features() {
+	const features = [
+		{
+			id: "feature-1",
+			icon: "⚡",
+			title: "24/7 Uptime",
+			description:
+				"Our server is always online, ensuring you can play whenever you want.",
+		},
+		{
+			id: "feature-2",
+			icon: "🔧",
+			title: "Custom Plugins",
+			description:
+				"Enjoy unique gameplay experiences with our carefully selected plugins.",
+		},
+		{
+			id: "feature-3",
+			icon: "👥",
+			title: "Active Community",
+			description:
+				"Join a friendly and active player base for the best multiplayer experience.",
+		},
+	];
+
 	return (
 		<section
 			id="features"
@@ -74,39 +109,207 @@ function Features() {
 					Server Features
 				</h2>
 				<div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-					<Card>
-						<CardHeader>
-							<CardTitle>24/7 Uptime</CardTitle>
-						</CardHeader>
-						<CardContent>
-							<p>
-								Our server is always online, ensuring you can play whenever you
-								want.
-							</p>
-						</CardContent>
-					</Card>
-					<Card>
-						<CardHeader>
-							<CardTitle>Custom Plugins</CardTitle>
-						</CardHeader>
-						<CardContent>
-							<p>
-								Enjoy unique gameplay experiences with our carefully selected
-								plugins.
-							</p>
-						</CardContent>
-					</Card>
-					<Card>
-						<CardHeader>
-							<CardTitle>Active Community</CardTitle>
-						</CardHeader>
-						<CardContent>
-							<p>
-								Join a friendly and active player base for the best multiplayer
-								experience.
-							</p>
-						</CardContent>
-					</Card>
+					{features.map((feature) => (
+						<Card key={feature.id}>
+							<CardHeader>
+								<CardTitle className="flex items-center gap-2">
+									<span className="text-green-600">{feature.icon}</span>{" "}
+									{feature.title}
+								</CardTitle>
+							</CardHeader>
+							<CardContent>
+								<p>{feature.description}</p>
+							</CardContent>
+						</Card>
+					))}
+				</div>
+			</div>
+		</section>
+	);
+}
+
+function ServerGallery() {
+	const images = [
+		{
+			id: "img-1",
+			src: "/placeholder-1.jpg",
+			alt: "Server spawn area",
+			caption: "Our beautiful spawn area",
+		},
+		{
+			id: "img-2",
+			src: "/placeholder-2.jpg",
+			alt: "Community builds",
+			caption: "Amazing community creations",
+		},
+		{
+			id: "img-3",
+			src: "/placeholder-3.jpg",
+			alt: "Server events",
+			caption: "Fun community events",
+		},
+	];
+
+	return (
+		<section id="gallery" className="w-full py-12 md:py-24 lg:py-32">
+			<div className="container px-4 md:px-6 mx-auto">
+				<h2 className="text-3xl font-bold tracking-tighter sm:text-5xl text-center mb-12">
+					Server Gallery
+				</h2>
+				<div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+					{images.map((image) => (
+						<div key={image.id} className="relative">
+							<img
+								src={image.src}
+								alt={image.alt}
+								className="w-full h-64 object-cover rounded-lg aspect-video bg-gray-100"
+							/>
+							<p className="mt-2 text-center text-gray-600">{image.caption}</p>
+						</div>
+					))}
+				</div>
+			</div>
+		</section>
+	);
+}
+
+function Commands() {
+	const commands = [
+		{
+			id: "cmd-1",
+			command: "/spawn",
+			description: "Teleport to the server spawn point",
+		},
+		{
+			id: "cmd-2",
+			command: "/tpa <player>",
+			description: "Request to teleport to another player",
+		},
+		{
+			id: "cmd-3",
+			command: "/sethome",
+			description: "Set your home location for quick teleporting",
+		},
+		{
+			id: "cmd-4",
+			command: "/msg <player>",
+			description: "Send a private message to another player",
+		},
+	];
+
+	return (
+		<section id="commands" className="w-full py-12 md:py-24 lg:py-32">
+			<div className="container px-4 md:px-6 mx-auto">
+				<h2 className="text-3xl font-bold tracking-tighter sm:text-5xl text-center mb-12">
+					Useful Commands
+				</h2>
+				<div className="space-y-4">
+					{commands.map((cmd) => (
+						<div key={cmd.id} className="flex items-start gap-4">
+							<span className="text-gray-400 mt-1">•</span>
+							<div>
+								<code className="font-mono text-lg">{cmd.command}</code>
+								<p className="text-gray-600 mt-1">{cmd.description}</p>
+							</div>
+						</div>
+					))}
+				</div>
+			</div>
+		</section>
+	);
+}
+
+function ServerRules() {
+	const rules = [
+		{
+			id: "rule-1",
+			title: "No Griefing",
+			description:
+				"Respect other players' builds and properties. Any form of griefing will result in a ban.",
+		},
+		{
+			id: "rule-2",
+			title: "Be Respectful",
+			description:
+				"Treat all players with respect. Harassment, hate speech, or excessive toxicity is not tolerated.",
+		},
+		{
+			id: "rule-3",
+			title: "No Cheating",
+			description:
+				"Use of hacks, exploits, or any unfair advantages is strictly prohibited.",
+		},
+		{
+			id: "rule-4",
+			title: "Keep Chat Clean",
+			description:
+				"Maintain family-friendly communication. No spamming or inappropriate content.",
+		},
+	];
+
+	return (
+		<section id="rules" className="w-full py-12 md:py-24 lg:py-32 bg-gray-50">
+			<div className="container px-4 md:px-6 mx-auto">
+				<h2 className="text-3xl font-bold tracking-tighter sm:text-5xl text-center mb-12">
+					Server Rules
+				</h2>
+				<div className="space-y-6">
+					{rules.map((rule) => (
+						<div key={rule.id} className="flex items-start gap-4">
+							<span className="text-gray-400 mt-1">•</span>
+							<div>
+								<h3 className="text-xl font-semibold">{rule.title}</h3>
+								<p className="text-gray-600 mt-1">{rule.description}</p>
+							</div>
+						</div>
+					))}
+				</div>
+			</div>
+		</section>
+	);
+}
+
+function Plugins() {
+	const plugins = [
+		{
+			id: "plugin-1",
+			name: "GriefPrevention",
+			description: "Protect your builds with advanced claim system",
+		},
+		{
+			id: "plugin-2",
+			name: "McMMO",
+			description: "Level up various skills and unlock special abilities",
+		},
+		{
+			id: "plugin-3",
+			name: "DynMap",
+			description: "View the server map in real-time through your web browser",
+		},
+		{
+			id: "plugin-4",
+			name: "CustomEnchants",
+			description: "Discover unique enchantments for your tools and weapons",
+		},
+	];
+
+	return (
+		<section id="plugins" className="w-full py-12 md:py-24 lg:py-32 bg-gray-50">
+			<div className="container px-4 md:px-6 mx-auto">
+				<h2 className="text-3xl font-bold tracking-tighter sm:text-5xl text-center mb-12">
+					Our Plugins
+				</h2>
+				<div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+					{plugins.map((plugin) => (
+						<Card key={plugin.id}>
+							<CardHeader>
+								<CardTitle>{plugin.name}</CardTitle>
+							</CardHeader>
+							<CardContent>
+								<p className="text-gray-600">{plugin.description}</p>
+							</CardContent>
+						</Card>
+					))}
 				</div>
 			</div>
 		</section>
@@ -121,22 +324,22 @@ function Pricing() {
 					Whitelist Pricing
 				</h2>
 				<div className="flex items-center justify-center">
-					<Card className="w-full max-w-screen-md">
+					<Card className="w-full max-w-screen-md border-green-200">
 						<CardHeader>
 							<CardTitle>Server Access</CardTitle>
 							<CardDescription>Join our exclusive community</CardDescription>
 						</CardHeader>
 						<CardContent>
-							<p className="text-4xl font-bold">5.99 zł</p>
+							<p className="text-4xl font-bold text-green-600">5.99 zł</p>
 							<p className="text-sm text-gray-500">One-time payment</p>
 							<ul className="mt-4 space-y-2 text-sm">
-								<li>✓ Full server access</li>
-								<li>✓ Join a friendly community</li>
-								<li>✓ Permanent whitelist spot</li>
+								<li className="text-green-700">✓ Full server access</li>
+								<li className="text-green-700">✓ Join a friendly community</li>
+								<li className="text-green-700">✓ Permanent whitelist spot</li>
 							</ul>
 						</CardContent>
 						<CardFooter>
-							<PurchaseButton className="w-full" />
+							<PurchaseButton className="w-full bg-green-600 hover:bg-green-700" />
 						</CardFooter>
 					</Card>
 				</div>
