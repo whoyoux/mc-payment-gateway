@@ -25,14 +25,16 @@ import {
 
 type Props = {
 	accessBoughtDate: Date | null;
+	paymentId: string | null;
 	boughtAccess: boolean;
 };
 
 export default function UserBillings({
 	accessBoughtDate,
 	boughtAccess,
+	paymentId,
 }: Props) {
-	if (!boughtAccess) {
+	if (!boughtAccess || !paymentId || !accessBoughtDate) {
 		return (
 			<Card id="billing">
 				<CardHeader>
@@ -68,9 +70,6 @@ export default function UserBillings({
 								<TableHead className="text-right whitespace-nowrap">
 									Amount
 								</TableHead>
-								<TableHead className="text-right whitespace-nowrap">
-									Action
-								</TableHead>
 							</TableRow>
 						</TableHeader>
 						<TableBody>
@@ -89,25 +88,10 @@ export default function UserBillings({
 								<TableCell className="text-right whitespace-nowrap">
 									5.99 zł
 								</TableCell>
-								<TableCell className="text-right">
-									<Button
-										variant="outline"
-										size="sm"
-										className="whitespace-nowrap"
-									>
-										<PrinterIcon className="w-4 h-4 mr-2" />
-										Print Invoice
-									</Button>
-								</TableCell>
 							</TableRow>
 						</TableBody>
 					</Table>
 				</CardContent>
-				{/* <CardFooter>
-					<Button variant="default" className="w-full sm:w-auto">
-						Print Invoice
-					</Button>
-				</CardFooter> */}
 			</Card>
 		</>
 	);

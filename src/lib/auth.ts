@@ -29,11 +29,17 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
 	events: {
 		async createUser({ user }) {
 			await createStripeCustomer(user);
+			if (user.email && user.name)
+				await sendWelcomeEmail({
+					username: user.name,
+					email: user.email,
+				});
 		},
 	},
 });
 
 import { cache } from "react";
+import { sendWelcomeEmail } from "./resend";
 export const cachedAuth = cache(async () => {
 	return await auth();
 });

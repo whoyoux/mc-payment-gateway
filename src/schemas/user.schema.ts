@@ -13,3 +13,7 @@ export const usernameSchema = z
 export const usernameFormSchema = z.object({
 	username: usernameSchema,
 });
+
+export const getReceiptSchema = z.object({
+	paymentId: z.string(),
+});

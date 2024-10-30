@@ -5,9 +5,10 @@ import { prisma } from "@/lib/prisma";
 import { authActionClient } from "@/lib/safe-action";
 import { stripe } from "@/lib/stripe";
 import { getBaseUrl } from "@/lib/utils";
-import { usernameFormSchema } from "@/schemas/user.schema";
+import { getReceiptSchema, usernameFormSchema } from "@/schemas/user.schema";
 import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
+import type Stripe from "stripe";
 
 export async function signInViaDiscord() {
 	await signIn("discord");

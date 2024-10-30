@@ -318,28 +318,103 @@ function Plugins() {
 
 function Pricing() {
 	return (
-		<section id="pricing" className="w-full py-12 md:py-24 lg:py-32">
+		<section id="pricing" className="w-full py-12 md:py-24 lg:py-32 ">
 			<div className="container px-4 md:px-6 mx-auto">
-				<h2 className="text-3xl font-bold tracking-tighter sm:text-5xl text-center mb-12">
-					Whitelist Pricing
-				</h2>
+				<div className="text-center space-y-4 mb-16">
+					<h2 className="text-3xl font-bold tracking-tighter sm:text-5xl bg-gradient-to-r from-green-600 to-emerald-600 bg-clip-text text-transparent">
+						Join Our Community
+					</h2>
+					<p className="text-gray-500 max-w-xl mx-auto">
+						Get permanent access to our premium Minecraft server with a one-time
+						payment
+					</p>
+				</div>
+
 				<div className="flex items-center justify-center">
-					<Card className="w-full max-w-screen-md border-green-200">
-						<CardHeader>
-							<CardTitle>Server Access</CardTitle>
-							<CardDescription>Join our exclusive community</CardDescription>
+					<Card className="w-full max-w-screen-md border-2 border-green-200 shadow-xl hover:shadow-2xl transition-shadow duration-300">
+						<CardHeader className="text-center space-y-2">
+							<div className="bg-green-100 text-green-700 text-sm font-medium py-1 px-3 rounded-full w-fit mx-auto">
+								MOST POPULAR
+							</div>
+							<CardTitle className="text-2xl">
+								Permanent Server Access
+							</CardTitle>
+							<CardDescription className="text-base">
+								Experience Minecraft like never before
+							</CardDescription>
 						</CardHeader>
-						<CardContent>
-							<p className="text-4xl font-bold text-green-600">5.99 zł</p>
-							<p className="text-sm text-gray-500">One-time payment</p>
-							<ul className="mt-4 space-y-2 text-sm">
-								<li className="text-green-700">✓ Full server access</li>
-								<li className="text-green-700">✓ Join a friendly community</li>
-								<li className="text-green-700">✓ Permanent whitelist spot</li>
+						<CardContent className="space-y-6">
+							<div className="text-center">
+								<p className="text-5xl font-bold text-green-600 flex items-center justify-center gap-1">
+									5.99 <span className="text-2xl">zł</span>
+								</p>
+								<p className="text-sm text-gray-500 mt-1">
+									One-time payment • Lifetime access
+								</p>
+							</div>
+
+							<ul className="space-y-3">
+								<li className="flex items-center gap-2 text-gray-700">
+									<div className="bg-green-100 p-1 rounded-full">
+										<svg
+											aria-hidden="true"
+											className="w-5 h-5 text-green-600"
+											fill="none"
+											stroke="currentColor"
+											viewBox="0 0 24 24"
+										>
+											<path
+												strokeLinecap="round"
+												strokeLinejoin="round"
+												strokeWidth="2"
+												d="M5 13l4 4L19 7"
+											/>
+										</svg>
+									</div>
+									Instant server access
+								</li>
+								<li className="flex items-center gap-2 text-gray-700">
+									<div className="bg-green-100 p-1 rounded-full">
+										<svg
+											aria-hidden="true"
+											className="w-5 h-5 text-green-600"
+											fill="none"
+											stroke="currentColor"
+											viewBox="0 0 24 24"
+										>
+											<path
+												strokeLinecap="round"
+												strokeLinejoin="round"
+												strokeWidth="2"
+												d="M5 13l4 4L19 7"
+											/>
+										</svg>
+									</div>
+									Join a friendly community
+								</li>
+								<li className="flex items-center gap-2 text-gray-700">
+									<div className="bg-green-100 p-1 rounded-full">
+										<svg
+											aria-hidden="true"
+											className="w-5 h-5 text-green-600"
+											fill="none"
+											stroke="currentColor"
+											viewBox="0 0 24 24"
+										>
+											<path
+												strokeLinecap="round"
+												strokeLinejoin="round"
+												strokeWidth="2"
+												d="M5 13l4 4L19 7"
+											/>
+										</svg>
+									</div>
+									Permanent whitelist spot
+								</li>
 							</ul>
 						</CardContent>
 						<CardFooter>
-							<PurchaseButton className="w-full bg-green-600 hover:bg-green-700" />
+							<PurchaseButton className="w-full bg-gradient-to-r from-green-600 to-emerald-600 hover:from-green-700 hover:to-emerald-700 text-lg py-6 shadow-lg hover:shadow-xl transition-all duration-200" />
 						</CardFooter>
 					</Card>
 				</div>
