@@ -117,7 +117,7 @@ export const goToCheckout = async (): Promise<CheckoutResult> => {
 	});
 
 	if (access) {
-		return { status: "error", message: "You already have access" };
+		return { status: "error", message: "You already have access!" };
 	}
 	// Redirect to checkout
 	const stripeSession = await stripe.checkout.sessions.create({
@@ -135,7 +135,7 @@ export const goToCheckout = async (): Promise<CheckoutResult> => {
 	});
 
 	if (!stripeSession.url) {
-		return { status: "error", message: "Error creating session" };
+		return { status: "error", message: "Error creating session!" };
 	}
 
 	redirect(stripeSession.url);
