@@ -63,10 +63,12 @@ function Hero() {
 						</p>
 					</div>
 					<div className="space-x-4">
-						<Button asChild className="bg-green-600 hover:bg-green-700">
+						<Button asChild variant="outline">
 							<Link href="#pricing">Buy Whitelist Spot</Link>
 						</Button>
-						<Button variant="outline">Learn More</Button>
+						<Button variant="ghost" className="text-white">
+							Learn More
+						</Button>
 					</div>
 				</div>
 			</div>
@@ -128,23 +130,28 @@ function Features() {
 	);
 }
 
+import Image1 from "@/assets/img1.webp";
+import Image2 from "@/assets/img2.webp";
+import Image3 from "@/assets/img3.webp";
+import Image from "next/image";
+
 function ServerGallery() {
 	const images = [
 		{
 			id: "img-1",
-			src: "/placeholder-1.jpg",
+			src: Image1,
 			alt: "Server spawn area",
 			caption: "Our beautiful spawn area",
 		},
 		{
 			id: "img-2",
-			src: "/placeholder-2.jpg",
+			src: Image2,
 			alt: "Community builds",
 			caption: "Amazing community creations",
 		},
 		{
 			id: "img-3",
-			src: "/placeholder-3.jpg",
+			src: Image3,
 			alt: "Server events",
 			caption: "Fun community events",
 		},
@@ -158,12 +165,18 @@ function ServerGallery() {
 				</h2>
 				<div className="grid grid-cols-1 md:grid-cols-3 gap-8">
 					{images.map((image) => (
-						<div key={image.id} className="relative">
-							<img
-								src={image.src}
-								alt={image.alt}
-								className="w-full h-64 object-cover rounded-lg aspect-video bg-gray-100"
-							/>
+						<div key={image.id} className="">
+							<div className="relative aspect-video">
+								<Image
+									src={image.src}
+									alt={image.alt}
+									fill
+									className="w-full aspect-video object-cover rounded-lg  bg-gray-100"
+									placeholder="blur"
+									sizes="(max-width: 768px) 90vw, (max-width: 1200px) 30vw, 400px"
+								/>
+							</div>
+
 							<p className="mt-2 text-center text-gray-600">{image.caption}</p>
 						</div>
 					))}
