@@ -31,16 +31,6 @@ export default async function DashboardPage() {
 		return notFound();
 	}
 
-	await sendAccessEmail({
-		email: session.user.email,
-		username: session.user.name,
-	});
-
-	// await sendWelcomeEmail({
-	// 	email: session.user.email,
-	// 	username: session.user.name,
-	// });
-
 	const userData = await getUserData(session.user.id);
 	const boughtAccess = Boolean(userData?.boughtAccess);
 	const accessBoughtDate = userData?.accessBoughtDate ?? null;
