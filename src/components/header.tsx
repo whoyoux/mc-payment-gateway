@@ -11,7 +11,7 @@ export function Header() {
 	return (
 		<header className="flex px-4 md:px-8 py-6 border-b justify-between items-center sticky top-0 bg-background">
 			<Link href="/">
-				<h1 className="font-semibold">McServer</h1>
+				<h1 className="font-semibold">PureMinecraft</h1>
 			</Link>
 			<div className="flex items-center gap-4">
 				<DesktopNav className="hidden md:flex" />

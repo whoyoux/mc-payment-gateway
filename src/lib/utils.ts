@@ -7,6 +7,6 @@ export function cn(...inputs: ClassValue[]) {
 
 export function getBaseUrl() {
 	return process.env.NODE_ENV === "production"
-		? "https://mc-payment-gateway.vercel.app"
+		? "https://www.pureminecraft.me"
 		: "http://localhost:3000";
 }

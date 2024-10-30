@@ -65,12 +65,16 @@ export const removeAccountAction = authActionClient.action(async ({ ctx }) => {
 			});
 
 			// Finally delete the user
-			await tx.user.delete({
+			const user = await tx.user.delete({
 				where: {
 					id: ctx.session.user.id,
 				},
 			});
 
+			if (user.stripeCustomerId) {
+				const res = await stripe.customers.del(user.stripeCustomerId);
+				console.log(res);
+			}
 			return true;
 		});
 
@@ -86,7 +90,8 @@ export const removeAccountAction = authActionClient.action(async ({ ctx }) => {
 			message: "An error occurred while deleting account",
 		};
 	}
-	await signOut({ redirectTo: "/" });
+	// await signOut({ redirectTo: "/" });
+	redirect("/");
 });
 
 type CheckoutResult =
