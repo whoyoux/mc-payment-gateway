@@ -34,7 +34,7 @@ export function WelcomeEmailTemplate({
 						</Text>
 
 						<Text className="text-gray-900 text-base leading-6 text-left my-4">
-							Thank you for joining our Minecraft server community! We're
+							Thank you for joining our Minecraft server community! We&apos;re
 							excited to have you on board.
 						</Text>
 

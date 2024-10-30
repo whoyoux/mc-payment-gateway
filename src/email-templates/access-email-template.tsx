@@ -63,7 +63,7 @@ export function AccessEmailTemplate({
 						</Text>
 
 						<Text className="text-gray-900 text-base leading-6 text-left my-4">
-							If you have any questions or need assistance, please don't
+							If you have any questions or need assistance, please don&apos;t
 							hesitate to reach out through our Discord server.
 						</Text>
 
