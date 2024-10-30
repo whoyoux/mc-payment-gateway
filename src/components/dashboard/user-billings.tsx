@@ -34,7 +34,7 @@ export default function UserBillings({
 }: Props) {
 	if (!boughtAccess) {
 		return (
-			<Card>
+			<Card id="billing">
 				<CardHeader>
 					<CardTitle>Purchase History</CardTitle>
 					<CardDescription>Your server access purchase</CardDescription>
@@ -51,7 +51,7 @@ export default function UserBillings({
 
 	return (
 		<>
-			<Card>
+			<Card id="billing">
 				<CardHeader>
 					<CardTitle>Purchase History</CardTitle>
 					<CardDescription>Your server access purchase</CardDescription>

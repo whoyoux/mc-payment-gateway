@@ -31,6 +31,8 @@ export async function POST(req: Request) {
 				return new Response("Session not found", { status: 400 });
 			}
 
+			console.log(session);
+
 			const customerEmail = session.customer_details?.email;
 
 			if (!customerEmail) {
@@ -58,6 +60,7 @@ export async function POST(req: Request) {
 					data: {
 						accessBoughtDate: new Date(),
 						boughtAccess: true,
+						paymentIntentId: session.payment_intent?.toString(),
 					},
 				});
 			} catch (err) {

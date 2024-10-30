@@ -22,7 +22,7 @@ type Props = {
 export default function UserAccess({ accessBoughtDate, boughtAccess }: Props) {
 	return (
 		<>
-			<Card>
+			<Card id="access">
 				<CardHeader>
 					<CardTitle className="flex items-center gap-4">
 						Server Access{" "}

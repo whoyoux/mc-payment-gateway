@@ -5,13 +5,14 @@ import SignInButton from "./sign-in-button";
 import { DesktopNav, MobileNav } from "./nav";
 import UserDropdown from "./user-dropdown";
 import Link from "next/link";
+import { SITE_NAME } from "@/lib/config";
 
 export function Header() {
 	const session = useSession();
 	return (
 		<header className="flex px-4 md:px-8 py-6 border-b justify-between items-center sticky top-0 bg-background">
 			<Link href="/">
-				<h1 className="font-semibold">PureMinecraft</h1>
+				<h1 className="font-semibold">{SITE_NAME}</h1>
 			</Link>
 			<div className="flex items-center gap-4">
 				<DesktopNav className="hidden md:flex" />

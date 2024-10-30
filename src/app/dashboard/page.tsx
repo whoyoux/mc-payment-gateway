@@ -9,24 +9,7 @@ import UserInGameName from "@/components/dashboard/user-in-game-name";
 import UserDangerZone from "@/components/dashboard/user-dangerzone";
 import { prisma } from "@/lib/prisma";
 import UserAccess from "@/components/dashboard/user-access";
-
-// const getUsername = async (id: string) => {
-// 	const result = await prisma.user.findUnique({
-// 		where: { id },
-// 		select: { username: true },
-// 	});
-// 	return result?.username;
-// };
-
-// const getUserAccess = async (id: string) => {
-// 	const result = await prisma.whitelistAccess.findFirst({
-// 		where: {
-// 			userId: id,
-// 		},
-// 	});
-
-// 	return result;
-// };
+import ServerInfo from "@/components/dashboard/server-info";
 
 const getUserData = async (id: string) => {
 	const user = await prisma.user.findUnique({
@@ -46,11 +29,6 @@ export default async function DashboardPage() {
 		return notFound();
 	}
 
-	// const [username, access] = await Promise.all([
-	// 	getUsername(session.user.id),
-	// 	getUserAccess(session.user.id),
-	// ]);
-
 	const userData = await getUserData(session.user.id);
 	const boughtAccess = Boolean(userData?.boughtAccess);
 	const accessBoughtDate = userData?.accessBoughtDate || null;
@@ -66,6 +44,7 @@ export default async function DashboardPage() {
 						boughtAccess={boughtAccess}
 						accessBoughtDate={accessBoughtDate}
 					/>
+					{boughtAccess && <ServerInfo />}
 					<UserBillings
 						boughtAccess={boughtAccess}
 						accessBoughtDate={accessBoughtDate}

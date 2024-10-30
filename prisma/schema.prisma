@@ -59,6 +59,7 @@ model User {
 
   boughtAccess     Boolean   @default(false) @map("bought_access")
   accessBoughtDate DateTime? @map("access_bought_date")
+  paymentIntentId  String?   @map("payment_intent_id")
 }
 
 model Session {

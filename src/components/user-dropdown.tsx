@@ -39,14 +39,19 @@ export default function UserDropdown({ user }: { user: User }) {
 							<span>Dashboard</span>
 						</DropdownMenuItem>
 					</Link>
-					<DropdownMenuItem>
-						<CreditCard />
-						<span>Billing</span>
-					</DropdownMenuItem>
-					<DropdownMenuItem>
-						<Star />
-						<span>Subscription</span>
-					</DropdownMenuItem>
+
+					<Link href="/dashboard#access">
+						<DropdownMenuItem>
+							<Star />
+							<span>My Access</span>
+						</DropdownMenuItem>
+					</Link>
+					<Link href="/dashboard#billing">
+						<DropdownMenuItem>
+							<CreditCard />
+							<span>Billing</span>
+						</DropdownMenuItem>
+					</Link>
 					<DropdownMenuSeparator />
 					{/* <form action={logOut} className="w-full"> */}
 					<button
