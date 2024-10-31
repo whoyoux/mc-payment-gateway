@@ -35,9 +35,13 @@ import { useState } from "react";
 
 type Props = {
 	username: string | null;
+	lastUsernameChange: Date | null;
 };
 
-export default function UserInGameName({ username }: Props) {
+export default function UserInGameName({
+	username,
+	lastUsernameChange,
+}: Props) {
 	const [isPending, setIsPending] = useState(false);
 	const form = useForm<z.infer<typeof usernameFormSchema>>({
 		resolver: zodResolver(usernameFormSchema),
@@ -51,30 +55,39 @@ export default function UserInGameName({ username }: Props) {
 		setIsPending(true);
 
 		const result = await updateUsernameAction(values);
+		setIsPending(false);
 
 		if (!result?.data?.success) {
-			toast.error("Failed to update username!");
+			toast.error(
+				result?.data?.message
+					? result?.data?.message
+					: "Failed to update username!",
+			);
 			return;
 		}
 		toast.success("Username updated successfully!");
-
-		setIsPending(false);
 	}
 	return (
 		<>
 			<Card>
 				<CardHeader>
 					<CardTitle>My In-Game Name</CardTitle>
-					<CardDescription>
+					<CardDescription className="flex flex-col gap-2">
 						{/* Update your in-game name <br />
 						Changing name here will change your whitelist slot on server! */}
 						{username ? (
-							<>
-								Update your in-game name <br />
-								Changing name here will change your whitelist slot on server!
-							</>
+							<>Update your in-game name</>
 						) : (
 							<>You don&apos;t have a username yet! </>
+						)}
+						<span className="text-destructive">
+							You can change your username once a day!
+						</span>
+						{!!lastUsernameChange && (
+							<span>
+								Your last change was:{" "}
+								{new Date(lastUsernameChange).toLocaleString()}
+							</span>
 						)}
 					</CardDescription>
 				</CardHeader>
@@ -126,9 +139,8 @@ export default function UserInGameName({ username }: Props) {
 							/>
 
 							{/* No need to change when username in database is equals to username in field */}
-							<Button
-								disabled={username === form.getValues().username || isPending}
-							>
+
+							<Button disabled={isPending} type="submit">
 								{isPending && <Loader2 className="h-4 w-4 animate-spin mr-2" />}
 								Update my in-game name
 							</Button>

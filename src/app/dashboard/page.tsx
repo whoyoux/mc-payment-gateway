@@ -10,7 +10,6 @@ import UserDangerZone from "@/components/dashboard/user-dangerzone";
 import { prisma } from "@/lib/prisma";
 import UserAccess from "@/components/dashboard/user-access";
 import ServerInfo from "@/components/dashboard/server-info";
-import { sendAccessEmail, sendWelcomeEmail } from "@/lib/resend";
 
 const getUserData = async (id: string) => {
 	const user = await prisma.user.findUnique({
@@ -20,6 +19,7 @@ const getUserData = async (id: string) => {
 			boughtAccess: true,
 			accessBoughtDate: true,
 			paymentIntentId: true,
+			lastUsernameChange: true,
 		},
 	});
 	return user;
@@ -36,13 +36,17 @@ export default async function DashboardPage() {
 	const accessBoughtDate = userData?.accessBoughtDate ?? null;
 	const username = userData?.username;
 	const paymentId = userData?.paymentIntentId ?? null;
+	const lastUsernameChange = userData?.lastUsernameChange ?? null;
 
 	return (
 		<>
 			<div className="bg-gray-100 w-full min-h-[100dvh] pb-10">
 				<DashboardHeader />
 				<main className="pt-4 px-4 flex flex-col max-w-screen-lg mx-auto gap-4">
-					<UserInGameName username={username ?? null} />
+					<UserInGameName
+						username={username ?? null}
+						lastUsernameChange={lastUsernameChange}
+					/>
 					<UserAccess
 						boughtAccess={boughtAccess}
 						accessBoughtDate={accessBoughtDate}

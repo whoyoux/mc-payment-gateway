@@ -4,11 +4,10 @@ import { auth, signIn, signOut } from "@/lib/auth";
 import { prisma } from "@/lib/prisma";
 import { authActionClient } from "@/lib/safe-action";
 import { stripe } from "@/lib/stripe";
-import { getBaseUrl } from "@/lib/utils";
-import { getReceiptSchema, usernameFormSchema } from "@/schemas/user.schema";
+import { getBaseUrl, isDifferenceOneDayOrMore } from "@/lib/utils";
+import { usernameFormSchema } from "@/schemas/user.schema";
 import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
-import type Stripe from "stripe";
 
 export async function signInViaDiscord() {
 	await signIn("discord");
@@ -22,6 +21,35 @@ export const updateUsernameAction = authActionClient
 	.schema(usernameFormSchema)
 	.action(async ({ parsedInput, ctx }) => {
 		try {
+			const todayDate = new Date();
+			const user = await prisma.user.findUnique({
+				where: {
+					id: ctx.session.user.id,
+				},
+				select: {
+					lastUsernameChange: true,
+				},
+			});
+
+			if (!user) {
+				return { success: false };
+			}
+
+			if (user?.lastUsernameChange) {
+				const canUserChange = isDifferenceOneDayOrMore(
+					user.lastUsernameChange,
+					todayDate,
+				);
+				const nextChangeDate = new Date(user.lastUsernameChange);
+				nextChangeDate.setDate(nextChangeDate.getDate() + 1);
+				if (!canUserChange) {
+					return {
+						success: false,
+						message: `You can change your username only once a day! You can change at: ${nextChangeDate.toLocaleString()}`,
+					};
+				}
+			}
+
 			const updated = await prisma.user.update({
 				where: {
 					id: ctx.session.user.id,
