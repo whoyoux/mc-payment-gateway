@@ -23,7 +23,7 @@ import {
 import { Input } from "@/components/ui/input";
 
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
-import { CircleAlert } from "lucide-react";
+import { CircleAlert, Loader2 } from "lucide-react";
 
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
@@ -31,12 +31,14 @@ import { usernameFormSchema } from "@/schemas/user.schema";
 import type { z } from "zod";
 import { toast } from "sonner";
 import { updateUsernameAction } from "@/app/actions";
+import { useState } from "react";
 
 type Props = {
 	username: string | null;
 };
 
 export default function UserInGameName({ username }: Props) {
+	const [isPending, setIsPending] = useState(false);
 	const form = useForm<z.infer<typeof usernameFormSchema>>({
 		resolver: zodResolver(usernameFormSchema),
 		defaultValues: {
@@ -45,6 +47,9 @@ export default function UserInGameName({ username }: Props) {
 	});
 
 	async function onSubmit(values: z.infer<typeof usernameFormSchema>) {
+		if (isPending) return;
+		setIsPending(true);
+
 		const result = await updateUsernameAction(values);
 
 		if (!result?.data?.success) {
@@ -52,6 +57,8 @@ export default function UserInGameName({ username }: Props) {
 			return;
 		}
 		toast.success("Username updated successfully!");
+
+		setIsPending(false);
 	}
 	return (
 		<>
@@ -119,7 +126,10 @@ export default function UserInGameName({ username }: Props) {
 							/>
 
 							{/* No need to change when username in database is equals to username in field */}
-							<Button disabled={username === form.getValues().username}>
+							<Button
+								disabled={username === form.getValues().username || isPending}
+							>
+								{isPending && <Loader2 className="h-4 w-4 animate-spin mr-2" />}
 								Update my in-game name
 							</Button>
 						</form>
